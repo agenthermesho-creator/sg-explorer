@@ -7,22 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#fbfaf6;--bg-soft:#f4f1e8;--surface:#fff;--surface-2:#f6f3ea;
-  --border:rgba(60,45,20,.12);--border-strong:rgba(60,45,20,.24);
-  --text-1:#2a2418;--text-2:#5a5140;--text-3:#8a7f68;
-  --accent:#2d7d6e;--accent-2:#d88a3a;--accent-3:#c4593f;
-  --radius:14px;--radius-lg:20px;
-  --shadow:0 12px 30px rgba(60,45,20,.07);
-  --shadow-lg:0 20px 48px rgba(60,45,20,.1);
-}
+:root{--bg:#fbfaf6;--bg-soft:#f4f1e8;--surface:#fff;--surface-2:#f6f3ea;--border:rgba(60,45,20,.12);--border-strong:rgba(60,45,20,.24);--text-1:#2a2418;--text-2:#5a5140;--text-3:#8a7f68;--accent:#2d7d6e;--accent-2:#d88a3a;--accent-3:#c4593f;--radius:14px;--radius-lg:20px;--shadow:0 12px 30px rgba(60,45,20,.07);--shadow-lg:0 20px 48px rgba(60,45,20,.1)}
 body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text-1);-webkit-font-smoothing:antialiased;padding:0 0 60px}
 .header{padding:36px 40px 16px;max-width:1400px;margin:0 auto}
 .header h1{font-family:'Playfair Display',serif;font-size:44px;font-weight:800;letter-spacing:-.02em;color:var(--text-1);line-height:1.05}
 .header .sub{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-top:4px}
 .header .meta{color:var(--text-2);font-size:14px;line-height:1.5}
 .header .meta a{color:var(--accent);text-decoration:none;font-weight:500}
-.header .meta a:hover{text-decoration:underline}
 .header .count-badge{display:inline-block;background:var(--accent);color:#fff;font-size:13px;font-weight:600;padding:5px 14px;border-radius:999px;white-space:nowrap}
 .chips-row{max-width:1400px;margin:4px auto 0;overflow-x:auto;overflow-y:hidden;white-space:nowrap;padding:8px 40px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
 .chips-row::-webkit-scrollbar{height:4px}
@@ -51,12 +42,8 @@ body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:va
 .empty-state.show{display:block}
 .empty-state h3{font-family:'Playfair Display',serif;font-size:28px;color:var(--text-2);margin-bottom:8px}
 .empty-state p{font-size:15px}
-@media(max-width:720px){
-  .header{padding:24px 16px 12px}
-  .chips-row{padding:6px 16px 10px}
-  .cards-grid{padding:12px 16px;grid-template-columns:1fr}
-  .header h1{font-size:32px}
-}
+.other-type{display:inline-block;font-size:10px;color:var(--text-3);background:var(--bg-soft);padding:1px 8px;border-radius:6px;font-weight:500;margin-left:6px}
+@media(max-width:720px){.header{padding:24px 16px 12px}.chips-row{padding:6px 16px 10px}.cards-grid{padding:12px 16px;grid-template-columns:1fr}.header h1{font-size:32px}}
 </style>
 </head>
 <body>
@@ -68,7 +55,7 @@ body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:va
       Landed near <strong>Changi North / Upper Changi</strong> &middot;
       <a href="https://www.google.com/maps/@1.35315,103.97317,15z" target="_blank">1.35315, 103.97317</a>
     </div>
-    <span class="count-badge">39 places</span>
+    <span class="count-badge">34 places</span>
   </div>
 </div>
 
@@ -77,30 +64,26 @@ body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:va
 <div class="cards-grid" id="grid"></div>
 
 <script>
-const DATA = {"seed":"explore1","lat":1.3531520797720373,"lng":103.973165428419,"total":39,"groups":{
+const DATA = {"groups":{
 "bar":[{"name":"georges @ Oasis","description":"","rating":4.9,"reviews":45,"mapsUrl":"https://maps.google.com/?cid=10396088697183837780","address":"963C Upper Changi Rd N, #01-12 Komo Shoppes, Singapore 506790","distance_m":869}],
 "beauty_salon":[{"name":"VIDA Beauty Aesthetic","description":"","rating":5,"reviews":40,"mapsUrl":"https://maps.google.com/?cid=2600031733693800148","address":"963C Upper Changi Rd N, #02-16 Komo Shoppes, Singapore 506790","distance_m":869}],
 "book_store":[{"name":"EM-One Marketing","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=14952413102504128309","address":"92 Flora Rd, #01-37, Singapore 507005","distance_m":598}],
 "cafe":[{"name":"Coffee Bean and Tea Leaf (Komo Shoppes)","description":"Coffeehouse chain serving a variety of beverages including its signature ice-blended options.","rating":3.5,"reviews":49,"mapsUrl":"https://maps.google.com/?cid=18358066899833271015","address":"963C Upper Changi Rd N, #01-08 Komo ShoppesSingapore, Singapore 506790","distance_m":876},{"name":"Delifrance Express - Esso Upper Changi North","description":"","rating":3.6,"reviews":12,"mapsUrl":"https://maps.google.com/?cid=4743896368895390742","address":"955 Upper Changi Rd N, Singapore 507662","distance_m":821}],
-"camping_cabin":[{"name":"Mizquitl","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=5478761832466092419","address":"Fraccion 6 rancho, el fresno, Singapore 507155","distance_m":935}],
-"chinese_restaurant":[{"name":"Ding Heng Restaurant","description":"","rating":3.8,"reviews":159,"mapsUrl":"https://maps.google.com/?cid=9119800454711022456","address":"963C Upper Changi Rd N, #01-11 Komo Shoppes, Singapore 506790","distance_m":879},{"name":"川香厨房","description":"","rating":3,"reviews":2,"mapsUrl":"https://maps.google.com/?cid=14099562613187774309","address":"11 Changi North Street 1, Singapore 498823","distance_m":477}],
+"chinese_restaurant":[{"name":"Ding Heng Restaurant","description":"","rating":3.8,"reviews":159,"mapsUrl":"https://maps.google.com/?cid=9119800454711022456","address":"963C Upper Changi Rd N, #01-11 Komo Shoppes, Singapore 506790","distance_m":879},{"name":"\u5ddd\u9999\u53a8\u623f","description":"","rating":3,"reviews":2,"mapsUrl":"https://maps.google.com/?cid=14099562613187774309","address":"11 Changi North Street 1, Singapore 498823","distance_m":477}],
 "coffee_shop":[{"name":"Li Xin Food Court","description":"","rating":3.8,"reviews":374,"mapsUrl":"https://maps.google.com/?cid=14720051945137612257","address":"11 Changi North Street 1, #01-04, Singapore 498823","distance_m":492},{"name":"Hainanese Chicken Rice","description":"","rating":5,"reviews":1,"mapsUrl":"https://maps.google.com/?cid=13976432625261569789","address":"11 Changi North Street 1, #01-04, Singapore 498823","distance_m":504},{"name":"Canteen","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=16607214070602632207","address":"41 Changi N Cres, Singapore 499638","distance_m":886}],
 "convenience_store":[{"name":"FairPrice Xpress","description":"","rating":4.1,"reviews":103,"mapsUrl":"https://maps.google.com/?cid=14422780646310156513","address":"955 Upper Changi Rd N, Singapore 507662","distance_m":842},{"name":"RDK Mini Mart","description":"","rating":3.8,"reviews":8,"mapsUrl":"https://maps.google.com/?cid=220836328447231555","address":"58 Flora Dr, B1-66 Parc Olympia, Singapore 506857","distance_m":892}],
 "electronics_store":[{"name":"UMS Semiconductor Pte Ltd","description":"","rating":4.3,"reviews":26,"mapsUrl":"https://maps.google.com/?cid=17533620829192022336","address":"23 Changi N Cres, Singapore 499616","distance_m":642},{"name":"Juan Kuang Pte Ltd","description":"","rating":2.6,"reviews":18,"mapsUrl":"https://maps.google.com/?cid=8069956525118042551","address":"12 Changi N Way, #03-06, Singapore 498791","distance_m":187},{"name":"ERP IU Center (Changi)","description":"","rating":5,"reviews":3,"mapsUrl":"https://maps.google.com/?cid=11590267478341343877","address":"20 Changi N Cres, Singapore 499613","distance_m":612},{"name":"HERNIS Scan Systems Asia Pte. Ltd.","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=9994398936768325422","address":"6 Changi North Street 1, Singapore 498825","distance_m":635},{"name":"Unilift Components Pte Ltd","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=1444763820778868596","address":"1 Changi North Street 1, Singapore 498826","distance_m":637}],
 "fusion_restaurant":[{"name":"Souperlicious","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=17353377384078567583","address":"3 Changi North Street 2, Singapore 498827","distance_m":862}],
 "gym":[{"name":"BFT Loyang","description":"","rating":5,"reviews":60,"mapsUrl":"https://maps.google.com/?cid=2764442347887080976","address":"933 Upper Changi Rd N, #02-04/06/07 LIV@Changi, Singapore 506785","distance_m":741},{"name":"Anytime Fitness Upper Changi","description":"","rating":5,"reviews":22,"mapsUrl":"https://maps.google.com/?cid=15094057742408726497","address":"963C Upper Changi Rd N, #02-12/13/14 Komo Shoppes, Singapore 506790","distance_m":883},{"name":"GoFit Changi","description":"","rating":4.6,"reviews":82,"mapsUrl":"https://maps.google.com/?cid=1283877768805216272","address":"933 Upper Changi Rd N, #03-01, Singapore 506785","distance_m":738}],
-"hostel":[{"name":"Aden m&e changi","description":"","rating":4,"reviews":1,"mapsUrl":"https://maps.google.com/?cid=12308913808910204949","address":"13 Jln Pernama, Singapore 499265","distance_m":399}],
 "indonesian_restaurant":[{"name":"Nasi Padang @Lin Xing Food Court","description":"","rating":4.5,"reviews":2,"mapsUrl":"https://maps.google.com/?cid=10598191852239726268","address":"11 Changi North Street 1, Singapore 498823","distance_m":482}],
-"lodging":[{"name":"Blk 79 Hedges Park Condo","description":"","rating":4.8,"reviews":4,"mapsUrl":"https://maps.google.com/?cid=9871362480784645858","address":"65 Flora Dr, Singapore","distance_m":709},{"name":"The Maple Roof Pte Ltd","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=7623308598849234752","address":"122B Tanah Merah Besar Rd, Singapore 498838","distance_m":817}],
 "manufacturer":[{"name":"Feonic (Sea) Distribution Pte Ltd","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=7093113695998307488","address":"8 Changi North Street 1, Singapore 498829","distance_m":615}],
-"museum":[{"name":"深圳华博","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=10730454500893499721","address":"Singapore, 无 邮政编码: 506999","distance_m":802}],
-"private_guest_room":[{"name":"Singapore Home","description":"","rating":5,"reviews":3,"mapsUrl":"https://maps.google.com/?cid=16712853149297436753","address":"88 Flora Rd, Singapore 507008","distance_m":676}],
-"restaurant":[{"name":"805 Seafood Kitchen","description":"","rating":3.7,"reviews":338,"mapsUrl":"https://maps.google.com/?cid=11426185988845834502","address":"11 Changi North Street 1, #01-04, Singapore 489923","distance_m":516},{"name":"Staff Canteen @ Upper Changi Road North","description":"","rating":4,"reviews":4,"mapsUrl":"https://maps.google.com/?cid=17018656974752259932","address":"8 Upper Changi Rd N, Singapore 506906","distance_m":871},{"name":"Three Chef\u2019s Seafood Restaurant","description":"","rating":1,"reviews":1,"mapsUrl":"https://maps.google.com/?cid=743345112038716833","address":"11 Changi North Street 1, Singapore 498823","distance_m":482},{"name":"Kimly Mixed Rice 金味饭庄 (No. 11 Changi North Street 1)","description":"","rating":5,"reviews":1,"mapsUrl":"https://maps.google.com/?cid=9397185539294570591","address":"11 Changi North Street 1, Singapore 498823","distance_m":484},{"name":"Economical Bee Hoon & Nasi Lemak","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=2530624309627509932","address":"11 Changi North Street 1, #01-04/15, Singapore 498823","distance_m":484},{"name":"InstaChef at Zuellig Pharma (Restricted Access)","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=15026323886702021563","address":"10 Changi N Way, Level 1 Main Lobby Area, Singapore 498740","distance_m":265}],
+"museum":[{"name":"\u6df1\u5733\u534e\u535a","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=10730454500893499721","address":"Singapore, \u65e0 \u90ae\u653f\u7f16\u7801: 506999","distance_m":802}],
+"restaurant":[{"name":"805 Seafood Kitchen","description":"","rating":3.7,"reviews":338,"mapsUrl":"https://maps.google.com/?cid=11426185988845834502","address":"11 Changi North Street 1, #01-04, Singapore 489923","distance_m":516},{"name":"Staff Canteen @ Upper Changi Road North","description":"","rating":4,"reviews":4,"mapsUrl":"https://maps.google.com/?cid=17018656974752259932","address":"8 Upper Changi Rd N, Singapore 506906","distance_m":871},{"name":"Three Chef\u2019s Seafood Restaurant","description":"","rating":1,"reviews":1,"mapsUrl":"https://maps.google.com/?cid=743345112038716833","address":"11 Changi North Street 1, Singapore 498823","distance_m":482},{"name":"Kimly Mixed Rice \u91d1\u5473\u98ef\u838a","description":"","rating":5,"reviews":1,"mapsUrl":"https://maps.google.com/?cid=9397185539294570591","address":"11 Changi North Street 1, Singapore 498823","distance_m":484},{"name":"Economical Bee Hoon & Nasi Lemak","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=2530624309627509932","address":"11 Changi North Street 1, #01-04/15, Singapore 498823","distance_m":484},{"name":"InstaChef at Zuellig Pharma","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=15026323886702021563","address":"10 Changi N Way, Level 1 Main Lobby Area, Singapore 498740","distance_m":265}],
 "storage":[{"name":"Bumwear","description":"","rating":5,"reviews":3,"mapsUrl":"https://maps.google.com/?cid=11593533566188583895","address":"11 Changi North Street 1, Singapore 498823","distance_m":482}],
 "supermarket":[{"name":"FairPrice Finest Komo Shoppes","description":"","rating":4.6,"reviews":38,"mapsUrl":"https://maps.google.com/?cid=16145748490148393908","address":"963C Upper Changi Rd N, #01-01to07, Singapore 506790","distance_m":883}],
 "tourist_attraction":[{"name":"The Mayor House","description":"","rating":null,"reviews":0,"mapsUrl":"https://maps.google.com/?cid=11488976482171925436","address":"19 Flora Dr, Singapore 506760","distance_m":891}],
 "western_restaurant":[{"name":"RoboChef","description":"","rating":3.3,"reviews":6,"mapsUrl":"https://maps.google.com/?cid=12644067902916672907","address":"01/01 Upper Changi Rd E, Singapore","distance_m":525}]
-}};
+},"total":34,"lat":1.3531520797720373,"lng":103.973165428419};
 
 const typeLabels = {};
 const allPlaces = [];
@@ -109,23 +92,18 @@ for (const [type, places] of Object.entries(DATA.groups)) {
   for (const p of places) allPlaces.push({...p, _type: type});
 }
 
-// Semantic categories — each category groups multiple place types
 const CATEGORIES = {
   "Food & Drink": ["restaurant","cafe","bar","chinese_restaurant","western_restaurant","coffee_shop","fusion_restaurant","indonesian_restaurant","fast_food_restaurant","asian_restaurant","asian_fusion_restaurant","seafood_restaurant","food_court"],
   "Shopping": ["supermarket","convenience_store","book_store","electronics_store","store","department_store","clothing_store","drugstore","pharmacy","shopping_mall"],
   "Fitness & Wellness": ["gym","beauty_salon","spa","swimming_pool"],
-  "Entertainment": ["tourist_attraction","museum","night_club","movie_theater","amusement_center","scenic_spot","indoor_playground","art_gallery"],
-  "Nature": ["park","garden","camping_cabin","botanical_garden"],
-  "Stay": ["lodging","hostel","hotel","private_guest_room","housing_complex"],
-  "Services": ["storage","manufacturer","association_or_organization","funeral_home","hostel"],
+  "Entertainment & Culture": ["tourist_attraction","museum","night_club","movie_theater","amusement_center","scenic_spot","indoor_playground","art_gallery","amusement_park","bowling_alley","casino","comedy_club","cultural_center","karaoke","live_music_venue","performing_arts_theater","planetarium","stadium","zoo"],
+  "Nature": ["park","garden","camping_cabin","botanical_garden","beach","lake","hiking_area","national_park","nature_preserve","playground","river"],
 };
 
-// Count places per category
 function catCount(catTypes) {
   return allPlaces.filter(p => catTypes.includes(p._type)).length;
 }
 
-// Chips
 const chips = document.getElementById('chips');
 const allChip = document.createElement('span');
 allChip.className = 'chip active';
@@ -135,7 +113,7 @@ chips.appendChild(allChip);
 
 for (const [catName, catTypes] of Object.entries(CATEGORIES)) {
   const count = catCount(catTypes);
-  if (count === 0) continue; // skip empty categories
+  if (count === 0) continue;
   const chip = document.createElement('span');
   chip.className = 'chip';
   chip.dataset.cat = catName;
@@ -143,7 +121,6 @@ for (const [catName, catTypes] of Object.entries(CATEGORIES)) {
   chips.appendChild(chip);
 }
 
-// Cards
 const grid = document.getElementById('grid');
 
 function render() {
@@ -154,10 +131,12 @@ function render() {
   let shown = 0;
 
   for (const p of allPlaces) {
-    // Check if this place's type falls under any active category
     const match = allMode || [...activeCats].some(cat => (CATEGORIES[cat] || []).includes(p._type));
     if (!match) continue;
     shown++;
+
+    const inCat = ["Food & Drink","Shopping","Fitness & Wellness","Entertainment & Culture","Nature"].some(c => (CATEGORIES[c]||[]).includes(p._type));
+    const uncat = inCat ? '' : ' <span class="other-type">uncategorised</span>';
 
     const card = document.createElement('div');
     card.className = 'card visible';
@@ -169,12 +148,10 @@ function render() {
       : '';
 
     card.innerHTML = `
-      <div class="type-badge">${typeLabels[p._type]}</div>
+      <div class="type-badge">${typeLabels[p._type]}${uncat}</div>
       <h3>${p.name}</h3>
       <div class="address">${p.address}</div>
-      ${dist}
-      ${desc}
-      ${rating}
+      ${dist}${desc}${rating}
       <a class="map-link" href="${p.mapsUrl}" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21C16 17 20 13.4183 20 10a8 8 0 1 0-16 0c0 3.4183 4 7 8 11z"/></svg>
         View on Maps
