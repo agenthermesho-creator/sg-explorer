@@ -93,11 +93,13 @@ for (const [type, places] of Object.entries(DATA.groups)) {
 }
 
 const CATEGORIES = {
-  "Food & Drink": ["restaurant","cafe","bar","chinese_restaurant","western_restaurant","coffee_shop","fusion_restaurant","indonesian_restaurant","fast_food_restaurant","asian_restaurant","asian_fusion_restaurant","seafood_restaurant","food_court"],
-  "Shopping": ["supermarket","convenience_store","book_store","electronics_store","store","department_store","clothing_store","drugstore","pharmacy","shopping_mall"],
-  "Fitness & Wellness": ["gym","beauty_salon","spa","swimming_pool"],
-  "Entertainment & Culture": ["tourist_attraction","museum","night_club","movie_theater","amusement_center","scenic_spot","indoor_playground","art_gallery","amusement_park","bowling_alley","casino","comedy_club","cultural_center","karaoke","live_music_venue","performing_arts_theater","planetarium","stadium","zoo"],
-  "Nature": ["park","garden","camping_cabin","botanical_garden","beach","lake","hiking_area","national_park","nature_preserve","playground","river"],
+  "Food": ["restaurant","chinese_restaurant","western_restaurant","fusion_restaurant","indonesian_restaurant","fast_food_restaurant","asian_restaurant","asian_fusion_restaurant","seafood_restaurant","food_court","american_restaurant","italian_restaurant","japanese_restaurant","thai_restaurant","mexican_restaurant","indian_restaurant","korean_restaurant","vietnamese_restaurant","mediterranean_restaurant","steak_house","hot_pot_restaurant","ramen_restaurant","sushi_restaurant","halal_restaurant","hamburger_restaurant","pizza_restaurant","buffet_restaurant"],
+  "Cafe/Bar": ["cafe","bar","coffee_shop","coffee_roastery","coffee_stand","tea_house","juice_shop","cocktail_bar","pub","gastropub","brewery","brewpub","wine_bar","beer_garden","lounge_bar","hookah_bar","internet_cafe"],
+  "Dessert": ["dessert_restaurant","dessert_shop","ice_cream_shop","candy_store","chocolate_shop","cake_shop","donut_shop","pastry_shop","confectionery","frozen_yogurt_shop","bagel_shop"],
+  "Shopping": ["supermarket","convenience_store","book_store","electronics_store","store","department_store","clothing_store","drugstore","pharmacy","shopping_mall","grocery_store","furniture_store","home_goods_store","sporting_goods_store","jewelry_store","shoe_store","toy_store","florist","gift_shop","liquor_store","market"],
+  "Fitness & Wellness": ["gym","beauty_salon","spa","swimming_pool","fitness_center","yoga_studio","nail_salon","hair_salon","massage","massage_spa","tanning_studio","skin_care_clinic","wellness_center","sauna"],
+  "Entertainment & Culture": ["tourist_attraction","museum","night_club","movie_theater","amusement_center","scenic_spot","indoor_playground","art_gallery","amusement_park","bowling_alley","casino","comedy_club","cultural_center","karaoke","live_music_venue","performing_arts_theater","planetarium","stadium","zoo","aquarium","casino","concert_hall","historical_landmark"],
+  "Nature": ["park","garden","camping_cabin","botanical_garden","beach","lake","hiking_area","national_park","nature_preserve","playground","river","dog_park","picnic_ground","water_park"],
 };
 
 function catCount(catTypes) {
@@ -135,7 +137,7 @@ function render() {
     if (!match) continue;
     shown++;
 
-    const inCat = ["Food & Drink","Shopping","Fitness & Wellness","Entertainment & Culture","Nature"].some(c => (CATEGORIES[c]||[]).includes(p._type));
+    const inCat = ["Food","Cafe/Bar","Dessert","Shopping","Fitness & Wellness","Entertainment & Culture","Nature"].some(c => (CATEGORIES[c]||[]).includes(p._type));
     const uncat = inCat ? '' : ' <span class="other-type">uncategorised</span>';
 
     const card = document.createElement('div');
