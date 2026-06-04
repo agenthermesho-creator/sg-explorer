@@ -96,10 +96,18 @@ for (const [k, s] of Object.entries(SPOTS)) {
   const c = document.createElement('span');
   c.className = 'loc-chip' + (first ? ' active' : '');
   c.dataset.spot = k;
-  c.innerHTML = `<span class="loc-name">${s.name}</span><span class="loc-street">${s.street}</span><span class="loc-coords">${s.lat.toFixed(4)}, ${s.lng.toFixed(4)}</span><span class="loc-count">${s.total} places</span>`;
+  const st = s.street.length > 20 ? s.street.slice(0, 20) + '...' : s.street;
+  c.innerHTML = '<span class="loc-name">' + s.name + '</span><span class="loc-street">' + st + '</span><span class="loc-coords">' + s.lat.toFixed(4) + ', ' + s.lng.toFixed(4) + '</span><span class="loc-count">' + s.total + ' places</span>';
   locChips.appendChild(c);
   first = false;
 }
+// Normalise chip widths
+setTimeout(function() {
+  var chips = document.querySelectorAll('.loc-chip');
+  var maxW = 0;
+  chips.forEach(function(c) { c.style.minWidth = ''; maxW = Math.max(maxW, c.offsetWidth); });
+  chips.forEach(function(c) { c.style.minWidth = maxW + 'px'; });
+}, 0);
 
 const catChips = document.getElementById('catChips');
 const grid = document.getElementById('grid');
