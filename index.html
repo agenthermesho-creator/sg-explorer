@@ -109,19 +109,37 @@ for (const [type, places] of Object.entries(DATA.groups)) {
   for (const p of places) allPlaces.push({...p, _type: type});
 }
 
+// Semantic categories — each category groups multiple place types
+const CATEGORIES = {
+  "Food & Drink": ["restaurant","cafe","bar","chinese_restaurant","western_restaurant","coffee_shop","fusion_restaurant","indonesian_restaurant","fast_food_restaurant","asian_restaurant","asian_fusion_restaurant","seafood_restaurant","food_court"],
+  "Shopping": ["supermarket","convenience_store","book_store","electronics_store","store","department_store","clothing_store","drugstore","pharmacy","shopping_mall"],
+  "Fitness & Wellness": ["gym","beauty_salon","spa","swimming_pool"],
+  "Entertainment": ["tourist_attraction","museum","night_club","movie_theater","amusement_center","scenic_spot","indoor_playground","art_gallery"],
+  "Nature": ["park","garden","camping_cabin","botanical_garden"],
+  "Stay": ["lodging","hostel","hotel","private_guest_room","housing_complex"],
+  "Services": ["storage","manufacturer","association_or_organization","funeral_home","hostel"],
+};
+
+// Count places per category
+function catCount(catTypes) {
+  return allPlaces.filter(p => catTypes.includes(p._type)).length;
+}
+
 // Chips
 const chips = document.getElementById('chips');
 const allChip = document.createElement('span');
 allChip.className = 'chip active';
 allChip.textContent = 'All';
-allChip.dataset.type = '__all__';
+allChip.dataset.cat = '__all__';
 chips.appendChild(allChip);
 
-for (const [type, places] of Object.entries(DATA.groups)) {
+for (const [catName, catTypes] of Object.entries(CATEGORIES)) {
+  const count = catCount(catTypes);
+  if (count === 0) continue; // skip empty categories
   const chip = document.createElement('span');
   chip.className = 'chip';
-  chip.dataset.type = type;
-  chip.innerHTML = `${typeLabels[type]} <span class="num">${places.length}</span>`;
+  chip.dataset.cat = catName;
+  chip.innerHTML = `${catName} <span class="num">${count}</span>`;
   chips.appendChild(chip);
 }
 
@@ -130,13 +148,15 @@ const grid = document.getElementById('grid');
 
 function render() {
   grid.innerHTML = '';
-  const activeTypes = new Set();
-  document.querySelectorAll('.chip.active:not([data-type="__all__"])').forEach(c => activeTypes.add(c.dataset.type));
-  const allMode = document.querySelector('[data-type="__all__"]').classList.contains('active');
+  const activeCats = new Set();
+  document.querySelectorAll('.chip.active:not([data-cat="__all__"])').forEach(c => activeCats.add(c.dataset.cat));
+  const allMode = document.querySelector('[data-cat="__all__"]').classList.contains('active');
   let shown = 0;
 
   for (const p of allPlaces) {
-    if (!allMode && !activeTypes.has(p._type)) continue;
+    // Check if this place's type falls under any active category
+    const match = allMode || [...activeCats].some(cat => (CATEGORIES[cat] || []).includes(p._type));
+    if (!match) continue;
     shown++;
 
     const card = document.createElement('div');
@@ -175,14 +195,14 @@ function render() {
 chips.addEventListener('click', e => {
   const chip = e.target.closest('.chip');
   if (!chip) return;
-  if (chip.dataset.type === '__all__') {
+  if (chip.dataset.cat === '__all__') {
     document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
     chip.classList.add('active');
   } else {
-    document.querySelector('[data-type="__all__"]').classList.remove('active');
+    document.querySelector('[data-cat="__all__"]').classList.remove('active');
     chip.classList.toggle('active');
-    if (!document.querySelector('.chip.active:not([data-type="__all__"])')) {
-      document.querySelector('[data-type="__all__"]').classList.add('active');
+    if (!document.querySelector('.chip.active:not([data-cat="__all__"])')) {
+      document.querySelector('[data-cat="__all__"]').classList.add('active');
     }
   }
   render();
